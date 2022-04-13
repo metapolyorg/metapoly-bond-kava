@@ -103,7 +103,10 @@ contract BondContract is Initializable {
 
         isLiquidityBond = address(_bondCalc) != address(0);
         principle.safeApprove(address(_treasury), type(uint).max);
-        D33D.safeApprove(address(_staking), type(uint).max);
+
+        if(address(_staking) != address(0)) {
+            D33D.safeApprove(address(_staking), type(uint).max);
+        }
     }
 
     function initializeBondTerms( 
@@ -384,7 +387,8 @@ contract BondContract is Initializable {
     }
 
     function setStaking(IStaking _staking) external virtual onlyAdmin {
-        staking = _staking;        
+        staking = _staking;     
+        D33D.safeApprove(address(_staking), type(uint).max);   
     }
 
     function setMinimumPrice(uint _minimumPrice) external virtual onlyAdmin {

@@ -10,7 +10,8 @@ module.exports = async () => {
         parameters.treasury.address, //treasury
         parameters.dao, //dao
         ethers.constants.AddressZero, // _bondCalculator
-        parameters.staking.address, //staking
+        ethers.constants.AddressZero,
+        // parameters.staking.address, //staking
         deployer.address, //admin
         ethers.constants.AddressZero])//biconomy
 
@@ -35,4 +36,4 @@ module.exports = async () => {
 
 
 
-module.exports.tags = ["oasis_deploy_usdcBond"]
+module.exports.tags = ["kava_deploy_usdcBond"]
