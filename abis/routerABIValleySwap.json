@@ -1,0 +1,223 @@
+[
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bytes32",
+                "name": "",
+                "internalType": "bytes32"
+            }
+        ],
+        "name": "PAIR_BYTECODE_HASH",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "amountIn",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "getAmountIn",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "amountOut",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveIn",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveOut",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "amountOut",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "getAmountOut",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "amountIn",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveIn",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveOut",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256[]",
+                "name": "amounts",
+                "internalType": "uint256[]"
+            }
+        ],
+        "name": "getAmountsIn",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "factory",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "amountOut",
+                "internalType": "uint256"
+            },
+            {
+                "type": "address[]",
+                "name": "path",
+                "internalType": "address[]"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256[]",
+                "name": "amounts",
+                "internalType": "uint256[]"
+            }
+        ],
+        "name": "getAmountsOut",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "factory",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "amountIn",
+                "internalType": "uint256"
+            },
+            {
+                "type": "address[]",
+                "name": "path",
+                "internalType": "address[]"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "reserveA",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveB",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "getReserves",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "factory",
+                "internalType": "address"
+            },
+            {
+                "type": "address",
+                "name": "tokenA",
+                "internalType": "address"
+            },
+            {
+                "type": "address",
+                "name": "tokenB",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "pair",
+                "internalType": "address"
+            }
+        ],
+        "name": "pairFor",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "factory",
+                "internalType": "address"
+            },
+            {
+                "type": "address",
+                "name": "tokenA",
+                "internalType": "address"
+            },
+            {
+                "type": "address",
+                "name": "tokenB",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "pure",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "amountB",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "quote",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "amountA",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveA",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "reserveB",
+                "internalType": "uint256"
+            }
+        ]
+    }
+]
