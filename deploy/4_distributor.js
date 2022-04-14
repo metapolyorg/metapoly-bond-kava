@@ -16,4 +16,4 @@ module.exports = async () => {
 
 };
 
-module.exports.tags = ["oasis_deploy_distributor"]
+module.exports.tags = ["kava_deploy_distributor"]

@@ -10,8 +10,7 @@ module.exports = async () => {
         parameters.treasury.address, //treasury
         parameters.dao, //dao
         ethers.constants.AddressZero, // _bondCalculator
-        ethers.constants.AddressZero,
-        // parameters.staking.address, //staking
+        parameters.staking.address, //staking
         deployer.address, //admin
         ethers.constants.AddressZero])//biconomy
 

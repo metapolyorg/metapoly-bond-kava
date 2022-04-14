@@ -1,11 +1,11 @@
 const { ethers, upgrades } = require("hardhat");
-const { kava_testnet: parameters } = require("../parameters")
+const { kava_testnet: addresses } = require("../parameters")
 
 module.exports = async () => {
     const [deployer] = await ethers.getSigners();
     let Staking = await ethers.getContractFactory("Staking", deployer)
-    let staking = await upgrades.deployProxy(Staking, [deployer.address, ethers.constants.AddressZero,
-    parameters.USM.address, parameters.USM.mintLimit])
+    let staking = await upgrades.deployProxy(Staking, [ethers.constants.AddressZero,
+    addresses.USM.address, addresses.USM.mintLimit])
     await staking.deployed()
 
     console.log("staking Proxy", staking.address)
@@ -26,26 +26,26 @@ module.exports = async () => {
 
     console.log('Deploying staking warmup')
     let StakingWarmup = await ethers.getContractFactory("StakingWarmup", deployer)
-    let stakingWarmup = await upgrades.deployProxy(StakingWarmup, [deployer.address])
+    let stakingWarmup = await upgrades.deployProxy(StakingWarmup)
     await stakingWarmup.deployed()
     console.log("stakingWarmup Proxy: ", stakingWarmup.address)
 
-    await staking.initialzeStaking(
-        parameters.d33d.address, 
+    await staking.initializeStaking(
+        addresses.d33d.address,
         stakingToken.address, 
-        parameters.distributor.address, 
+        addresses.distributor.address, 
         stakingWarmup.address,
-        parameters.distributor.epochLength, //length in seconds(8hrs)
+        addresses.distributor.epochLength, //length in seconds(8hrs)
         1, //firstEpochNumber 
-        parameters.staking.firstEpochStartTimestamp, //startingTimestampOfFIrstEpoch
-        addresses.address.DAO,
-        addresses.USM.USMMinter,
+        addresses.staking.firstEpochStartTimestamp, //startingTimestampOfFIrstEpoch
+        addresses.dao,
+        addresses.USM.usmMinter,
         vD33D.address)
-    await StakingWarmup.connect(deployer).addStakingContract(staking.address)
+    await stakingWarmup.connect(deployer).addStakingContract(staking.address)
 
-    let Distributor = await ethers.getContractAt("Distributor", parameters.distributor.address, deployer)
-    await Distributor.connect(deployer).addRecipient(staking.address, stakingToken.address, parameters.staking.rewardRate)
+    let Distributor = await ethers.getContractAt("Distributor", addresses.distributor.address, deployer)
+    await Distributor.connect(deployer).addRecipient(staking.address, stakingToken.address, addresses.staking.rewardRate)
 };
 
-module.exports.tags = ["oasis_deploy_staking"]
+module.exports.tags = ["kava_deploy_staking"]
 
