@@ -18,11 +18,11 @@ module.exports = {
                     markdownPerc: "5000",
                 }
             },
-            rose: {
-                address: "",
+            kava: {
+                address: "0xa6C88ca60DCA276ab59596E7715cf91663cdC294",
                 BCV: "600",
                 vestingTerm: "432000",
-                minimumPrice: "0.000303", //minimum bond price
+                minimumPrice: "0.2", //minimum bond price
                 calc: {
                     address: "",
                     markdownPerc: "5000",

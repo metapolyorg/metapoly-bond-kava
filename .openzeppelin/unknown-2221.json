@@ -54,6 +54,26 @@
       "address": "0x07A4C1D9aabCeb621D88a1220617A26c9a18E902",
       "txHash": "0xe0dd78fec1dd06721933807af6ef195638ada2adeff3b8c63109ea353feb11d1",
       "kind": "transparent"
+    },
+    {
+      "address": "0xC8140D160D8bBd585A369786232027E04d1CB02c",
+      "txHash": "0x7ced5be54f8a1a607a0d418a75b6e3786468da762b65acac95321ec521263106",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x6F7A0753142EC34ce04C407d98A88e0CE31C7510",
+      "txHash": "0xdc921350e6bb035952ff19fb78cf83ae9f0da6238468cef65b842043659dfbd7",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc69261C38b6d66424fAE61543aa558833D375324",
+      "txHash": "0x545ad5bdf2abec7ce3f6a2215aba3e1a4edb735f2ea4aef9b80f5ebb67973c76",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xa6C88ca60DCA276ab59596E7715cf91663cdC294",
+      "txHash": "0x5b6f79d088c2d6ea865d093b3311c604bad6bd8c69a347d23d391ffc89114431",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -2419,6 +2439,120 @@
           "t_mapping(t_address,t_bool)": {
             "label": "mapping(address => bool)",
             "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "9969130d7b82e69c3e3d3a25a8def879b08bb3dbe0bb6de3930d98277e3b54d8": {
+      "address": "0xfAA3A841222dE704b99089497ac66882D94110Be",
+      "txHash": "0xbc1f647aa00166d318db83805e2fcf72238c8d65ef3eb01c31ea6c7eebbcd836",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol:36"
+          },
+          {
+            "label": "_owner",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_address",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:22"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "OwnableUpgradeable",
+            "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
+          },
+          {
+            "label": "KAVA",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_address",
+            "contract": "BondCalcKAVA",
+            "src": "contracts/bond/bondCalc/BondCalcKAVA.sol:15"
+          },
+          {
+            "label": "USDC",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_address",
+            "contract": "BondCalcKAVA",
+            "src": "contracts/bond/bondCalc/BondCalcKAVA.sol:16"
+          },
+          {
+            "label": "factory",
+            "offset": 0,
+            "slot": "103",
+            "type": "t_address",
+            "contract": "BondCalcKAVA",
+            "src": "contracts/bond/bondCalc/BondCalcKAVA.sol:17"
+          },
+          {
+            "label": "router",
+            "offset": 0,
+            "slot": "104",
+            "type": "t_contract(IRouter)9050",
+            "contract": "BondCalcKAVA",
+            "src": "contracts/bond/bondCalc/BondCalcKAVA.sol:18"
+          },
+          {
+            "label": "markdownPerc",
+            "offset": 0,
+            "slot": "105",
+            "type": "t_uint256",
+            "contract": "BondCalcKAVA",
+            "src": "contracts/bond/bondCalc/BondCalcKAVA.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_contract(IRouter)9050": {
+            "label": "contract IRouter",
+            "numberOfBytes": "20"
           },
           "t_uint256": {
             "label": "uint256",

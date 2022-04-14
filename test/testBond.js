@@ -158,8 +158,8 @@ describe("Metapoly bond", () => {
         await treasury.manage(USDCAddr, ethers.utils.parseUnits("1", 6))
         expect(await USDC.balanceOf(deployer.address)).to.eq(ethers.utils.parseUnits("2", 6))
 
-        await bond.setStaking(ethers.constants.AddressZero)
-        expect(await bond.staking()).to.eq(ethers.constants.AddressZero)
+        await bond.setStaking(deployer.address)
+        expect(await bond.staking()).to.eq(deployer.address)
         await bond.setMinimumPrice(1)
         expect((await bond.terms())[2]).to.eq(1)
         await bond.setTrustedForwarder(deployer.address)
@@ -201,6 +201,118 @@ describe("Metapoly bond", () => {
 
     })
 
+    it("Should work with KAVA", async () => {
+        const [deployer] = await ethers.getSigners()
+
+        // Deploy D33D
+        const D33DFac = await ethers.getContractFactory("Token", deployer)
+        const D33D = await upgrades.deployProxy(D33DFac, ["D33D", "D33D", 18])
+        await D33D.mint(D33D.address, ethers.utils.parseEther("1000000"))
+
+        const wKAVAFac = await ethers.getContractFactory("TestERC20", deployer)
+        const wKAVA = await wKAVAFac.deploy("wKAVA", "wKAVA", "18")
+        const wKAVAAddr = wKAVA.address
+        await wKAVA.mint(ethers.utils.parseUnits("210000", "18"))
+
+        // Deploy Treasury
+        const treasuryFac = await ethers.getContractFactory("Treasury", deployer)
+        const treasury = await upgrades.deployProxy(treasuryFac, [
+            D33D.address,
+            USDCAddr,
+            ethers.utils.parseEther("0.1")
+        ])
+
+        // Deploy Staking
+        const mockStaking = await waffle.deployMockContract(deployer, IERC20ABI)
+
+        const mockRouter = await waffle.deployMockContract(deployer, routerABI)
+        await mockRouter.mock.getAmountsOut.returns(
+            [
+                ethers.utils.parseEther("1"),
+                ethers.utils.parseUnits("4", "6")
+            ])
+        // Deploy BondCalc
+        const bondCalcFac = await ethers.getContractFactory("BondCalcKAVA", deployer)
+        const bondCalc = await upgrades.deployProxy(bondCalcFac, [
+            5000, // markdownPerc_
+            mockRouter.address,//router
+            wKAVAAddr,//rose
+            USDCAddr//usdc
+        ])
+
+        // Deploy BondContract
+        const bondFac = await ethers.getContractFactory("BondContract", deployer)
+        const bond = await upgrades.deployProxy(bondFac, [
+            D33D.address, // _D33D
+            wKAVAAddr, // _principle
+            treasury.address, // _treasury
+            deployer.address, // _DAO
+            bondCalc.address, // _bondCalculator
+            mockStaking.address, // _staking
+            deployer.address, // _admin
+            ethers.constants.AddressZero, // _trustedForwarderAddress
+        ])
+
+        // Donate Bond to solve transfer error for last redeem
+        await D33D.mint(bond.address, ethers.utils.parseEther("0.01"))
+
+        // Whitelist Bond contract
+        await treasury.toggle(
+            4, // _managing
+            bond.address, // _address
+            ethers.constants.AddressZero // _calculator
+        )
+
+        // Whitelist WETH
+        await treasury.toggle(
+            5, // _managing
+            wKAVAAddr, // _address
+            bondCalc.address // _calculator
+        )
+
+        await treasury.updateD33DPrice(ethers.utils.parseEther("0.1"))
+
+        // Initialize Bond
+        await bond.initializeBondTerms(
+            600, // _controlVariable
+            432000, // _vestingTerm
+            ethers.utils.parseEther("0.2"), // _minimumPrice //1 kava = 4 usd //1 d33d = 0.8 usd
+            100000, // _maxPayout
+            0, // _fee
+            ethers.utils.parseEther("10000"), // _maxDebt
+            0 // _initialDebt
+        )
+
+        // Bond ETH
+        await bond.deposit(
+            ethers.utils.parseEther("1"), // _amount
+            (await bond.bondPrice()).mul(101).div(100), // _maxPrice
+            deployer.address, // _depositor
+            { value: ethers.utils.parseEther("1") }
+        )
+
+        await expect(bond.deposit(
+            ethers.utils.parseEther("1"), // _amount
+            (await bond.bondPrice()).mul(101).div(100), // _maxPrice
+            deployer.address, // _depositor
+            { value: ethers.utils.parseEther("0.1") }
+        )).to.be.revertedWith("Invalid ETH")
+
+        // Redeem D33D
+        await network.provider.request({ method: "evm_increaseTime", params: [86400 * 5] }) // 5 days
+        await network.provider.send("evm_mine")
+        await bond.redeem(deployer.address, false)
+        // console.log(ethers.utils.formatEther(await D33D.balanceOf(deployer.address)))
+
+        await bondCalc.changeMarkdownPerc(5000)
+        await treasury.auditReserves()
+
+        await expect(treasury.manage(wKAVAAddr, ethers.utils.parseEther("1"))).to.be.revertedWith("Not approved")
+        await expect(treasury.deposit(ethers.utils.parseEther("1"), SANDAddr, 0)).to.be.revertedWith("Not accepted")
+        await expect(treasury.deposit(ethers.utils.parseEther("1"), USDCAddr, 0)).to.be.revertedWith("Not approved")
+
+    })
+
     it("Shoudk work with NFT", async () => {
         const [deployer] = await ethers.getSigners()
         const USDCFac = await ethers.getContractFactory("TestERC20", deployer)
@@ -231,7 +343,7 @@ describe("Metapoly bond", () => {
         //commented until bondcalc is deployed
         // const bondCalc = await waffle.deployMockContract(
         //     deployer,
-        //     artifacts.readArtifactSync("BondCalcROSE").abi) //same abi for all bondCalcs
+        //     artifacts.readArtifactSync("BondCalcKAVA").abi) //same abi for all bondCalcs
         // await treasury.toggle(8, deployer.address, ethers.constants.AddressZero)
         // await treasury.toggle(9, NFT.address, bondCalc.address)
 
