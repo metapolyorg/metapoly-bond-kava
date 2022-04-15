@@ -20,18 +20,20 @@ module.exports = {
             },
             kava: {
                 address: "0xa6C88ca60DCA276ab59596E7715cf91663cdC294",
+                impl: "0xc28035173F7150c6377506Daa5ad2EB310e06708",
                 BCV: "600",
                 vestingTerm: "432000",
                 minimumPrice: "0.2", //minimum bond price
                 calc: {
-                    address: "",
+                    address: "0xc69261C38b6d66424fAE61543aa558833D375324",
+                    impl: "0xfAA3A841222dE704b99089497ac66882D94110Be",
                     markdownPerc: "5000",
                 }
             },
         },
         d33d: {
             address: "0x6100A7455316442f136574f59dA607E8851c5cAE",
-            impl:"0x9EEc037a4B3F189e8C2DdeED5e42c3D16A22f23f"
+            impl: "0x9EEc037a4B3F189e8C2DdeED5e42c3D16A22f23f"
         },
         dao: "0xBE25bC1237EfC5D678C0d5883179C8147D19A1Aa",
         distributor: {
@@ -48,7 +50,7 @@ module.exports = {
             firstEpochStartTimestamp: "1744603227",
             rewardRate: "1", //2 == 0.00002% 4 - decimals
             vD33D: "0x4EbaC3f7e0E17e427AB7add7460580328f56e448",
-            sD33D:"0x49F0eC2d45DdF2065b7B7d7616d3Bff3912Eee5e",
+            sD33D: "0x49F0eC2d45DdF2065b7B7d7616d3Bff3912Eee5e",
             stakingWarmup: "0x07A4C1D9aabCeb621D88a1220617A26c9a18E902"
         },
         tokens: {
@@ -59,7 +61,7 @@ module.exports = {
         },
         treasury: {
             address: "0x77F684099F8cab97F97c3fC5379751f730F15b2f",
-            impl:"0xe99D35DC05cA3f8961c1425615F0776B157De1e6"
+            impl: "0xe99D35DC05cA3f8961c1425615F0776B157De1e6"
         },
         USM: {
             address: "0xDf5324ebe6F6b852Ff5cBf73627eE137e9075276",
