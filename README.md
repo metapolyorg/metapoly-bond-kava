@@ -15,6 +15,8 @@
 | Mock wKAVA  |  [0xED1432BfE5235019c6724c23628467D92F26cabb](https://explorer.evm-alpha.kava.io/address/0xED1432BfE5235019c6724c23628467D92F26cabb/transactions) |
 | Mock D33D-USDC pair  |  [0x5071Ca34568EDc39Df6B5AFad5EAE7680c423Ed3](https://explorer.evm-alpha.kava.io/address/0x5071Ca34568EDc39Df6B5AFad5EAE7680c423Ed3/transactions) |
 | Mock wKAVA-USDC pair  |  [0x7d77e3907247c571A68562DAb2A9d906788F522B](https://explorer.evm-alpha.kava.io/address/0x7d77e3907247c571A68562DAb2A9d906788F522B/transactions) |
+| Mock wKAVA-D33D pair  |  [0xd56b93c926fA03ac2AbA14Cb93830515A6948d8D](https://explorer.evm-alpha.kava.io/address/0xd56b93c926fA03ac2AbA14Cb93830515A6948d8D/transactions) |
+| Mock wKAVA-USM pair  |  [0xa0B3edC864Ed5a836b2E57873236C8F31c2552cC](https://explorer.evm-alpha.kava.io/address/0xa0B3edC864Ed5a836b2E57873236C8F31c2552cC/transactions) |
 
 ### Bonds
 Bonds sell d33d token in exhange for the below mentioned assets. Users can get D33D token for a discount from the market price.
